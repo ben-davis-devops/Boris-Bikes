@@ -9,6 +9,11 @@ describe DockingStation do
     expect(bike).to be_working # checking if be_working function shows that the bike is working
   end
 
+  it 'does not release bike when none are available' do
+     # instantiate release
+     expect(subject.release_bike).to raise_error(fail) # expect error to be raised
+  end
+
   it 'docks something' do
     bike = Bike.new
     expect(subject.dock(bike)).to eq bike
