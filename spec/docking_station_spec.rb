@@ -4,6 +4,10 @@ describe DockingStation do
 
   it { is_expected.to respond_to(:dock).with(1).argument}
 
+  it 'has a default capacity' do
+    expect(subject.capacity).to eq DockingStation::DEFAULT_CAPACITY
+  end
+
   # it 'releases working bikes' do
   #   bike = subject.release_bike # bike = new element(method - release bike)
   #   expect(bike).to be_working # checking if be_working function shows that the bike is working
@@ -28,13 +32,13 @@ describe DockingStation do
   end
 
   describe '#dock' do
-  #   it 'does not accept more bikes than capacity' do
-  #     subject.dock(Bike.new)
-  #     expect { subject.dock Bike.new }.to raise_error 'too many bikes at docking station'
-  #   end
+    # it 'does not accept more bikes than capacity' do
+    #   subject.dock(Bike.new)
+    #   expect { subject.dock Bike.new }.to raise_error 'too many bikes at docking station'
+    # end
   
     it 'error after docking over capacity of 20' do
-      20.times { subject.dock Bike.new }
+      subject.capacity.times { subject.dock Bike.new }
       expect { subject.dock Bike.new }.to raise_error 'too many bikes at docking station (20)'
     end
   end
