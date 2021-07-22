@@ -37,9 +37,16 @@ describe DockingStation do
     #   expect { subject.dock Bike.new }.to raise_error 'too many bikes at docking station'
     # end
   
-    it 'error after docking over capacity of 20' do
+    it 'error after docking over capacity' do
+      subject = DockingStation.new
       subject.capacity.times { subject.dock Bike.new }
-      expect { subject.dock Bike.new }.to raise_error 'too many bikes at docking station (20)'
+      expect { subject.dock Bike.new }.to raise_error('too many bikes at docking station')
+    end
+
+    it "when you try to add a bike to the storage when it has maximum with a different capacity in it returns an error" do
+      subject = DockingStation.new(50)
+      50.times { subject.dock(Bike.new) }
+      expect { subject.dock(Bike.new) }.to raise_error('too many bikes at docking station')
     end
   end
   # it 'a message describing the test' do
